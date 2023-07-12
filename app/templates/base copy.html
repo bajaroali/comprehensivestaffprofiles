@@ -1,0 +1,147 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+    {{ super() }}
+    <title>{% block title %}{% endblock %} - TMIS</title>
+
+{% endblock %}
+
+{% block navbar %} 
+{% if current_user.is_authenticated %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+            <img alt="Brand" src="{{ url_for('static', filename= 'kpslogo-32x32.png' ) }}" class="image">
+        </a>
+        
+        </a>
+      </div>
+  
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{{ url_for('main.index') }}">Dashboard<span class="sr-only">(current)</span></a></li>
+          <li><a href="{{ url_for('main.index') }}">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ url_for('auth.viewusers') }}">Manage users</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="{{ url_for('auth.viewroles') }}">System Roles</a></li>
+             </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrative Settings <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Regions</a></li>
+              <li><a href="#">Counties</a></li>
+              <li><a href="#">Subcounties</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="{{ url_for('auth.viewsections') }}">Sections</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Designations</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="{{ url_for('auth.viewranks') }}">Ranks</a></li>
+             </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Logout</a></li>
+            {% else %}
+                 <li><a href="{{ url_for('auth.login') }}">
+                     <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                            Log in</a></li>
+                            
+            {% endif %}
+          
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage your account<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Change Password</a></li>
+              <li><a href="#">Update your email</a></li>
+              <li><a href="#">View your profile</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="{{  url_for('auth.logout') }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+{% endif %}
+{% endblock %} 
+
+<div class="container">
+  <div class="card">
+      <div class="card-body">
+          <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-8">
+                  <h3 class="card-title"><b>Add New User</b></h3>
+              
+              
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+{% block content %}
+<br> <br><br>
+<div class="container"> 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %} 
+      {% for category, message in messages %}
+      
+            <div class="alert alert-{{category}}"> 
+                <button type="button" class="close" 
+                data-dismiss="alert">&times;</button>
+                <strong>{{ message }} </strong>   
+            </div>
+      {% endfor %} 
+{% endif %}
+{% endwith%}
+     
+{% block page_content %}
+
+{% endblock %}
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+

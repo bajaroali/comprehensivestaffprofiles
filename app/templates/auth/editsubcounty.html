@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Edit subcounty  {% endblock %}
+
+{% block page_content %} 
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+          <div class="row">
+                <div class="col-md-10">
+                    <div class="page-header justify-content-center">
+                        <h3><strong>Edit subcounty details </strong></h3>
+                    </div>
+                <p>{{ wtf.quick_form(form) }} </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

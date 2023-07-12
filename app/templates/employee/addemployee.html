@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+{{ super() }}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+{% endblock%}
+{% block title %} Add new staff details  {% endblock %}
+
+{% block page_content %} 
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+          <div class="row">
+                <div class="col-md-10">
+
+                    <form action="{{ url_for('employee.addemployee') }}" class="form formhorizontal" method="post" novalidate>
+                        <legend><h3><strong>Add New Staff Details. </strong></h3></legend>
+                        {{ form.hidden_tag() }}
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                
+                                  {{form.service_number.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.service_number(class="form-control")}}
+                                  {% if form.service_number.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.service_number.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+                              
+          
+            
+                            </div>
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                  {{form.pf_number.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.pf_number(class="form-control")}}
+                                  {% if form.pf_number.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.pf_number.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                          </div>
+            
+                          <div class="row">
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+            
+                              <div class="form-outline">
+                                
+                                  {{form.id_number.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.id_number(class="form-control")}}
+                                  {% if form.id_number.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.id_number.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4">
+                              <div class="form-check form-check-inline">
+                                <br>
+                                {{form.tax_pin.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.tax_pin(class="form-control")}}
+                                  {% if form.tax_pin.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.tax_pin.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                          </div>
+      
+                          <div class="row">
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+            
+                              <div class="form-outline">
+                                
+                                  {{form.gender.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  
+                                  {% for subfield in form.gender %}
+                                  <div>
+                                    {{ subfield(checked=subfield.checked, class="control-label") }}
+                                    <label for="{{ subfield.id }}">   {{ subfield.label }}</label>
+                                  </div>
+                                {% endfor %}
+                                  {% if form.gender.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.gender.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4">
+                              <div class="form-check form-check-inline">
+                                <br>
+                                {{form.first_name.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.first_name(class="form-control")}}
+                                  {% if form.first_name.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.first_name.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                          </div>
+            
+                          <div class="row">
+                            <div class="col-md-6 mb-4 pb-2">
+            
+                              <div class="form-outline">
+                                  {{form.middle_name.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.middle_name(class="form-control")}}
+                                  {% if form.middle_name.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.middle_name.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4 pb-2">
+            
+                              <div class="form-outline">
+                                  {{form.last_name.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.last_name(class="form-control")}}
+                                  {% if form.last_name.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.last_name.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 mb-4 pb-2">
+            
+                              <div class="form-outline">
+                                  {{form.tribe.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.tribe( class="form-control")}}
+                                  {% if form.tribe.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.tribe.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4 pb-2">
+            
+                              <div class="form-outline">
+                                  {{form.dob.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.dob( class="form-control")}}
+                                  {% if form.dob.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.dob.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                  {{form.blood_group.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.blood_group( class="form-control")}}
+                                  {% if form.blood_group.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.blood_group.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                                </div>
+              
+                              </div>
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                  {{form.identification_marks.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.identification_marks( class="form-control")}}
+                                  {% if form.identification_marks.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.identification_marks.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                                </div>
+              
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                  {{form.height.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.height( class="form-control")}}
+                                  {% if form.height.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.height.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                                </div>
+              
+                              </div>
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                  {{form.face_shape.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.face_shape( class="form-control")}}
+                                  {% if form.face_shape.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.face_shape.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                                </div>
+              
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                  {{form.transferin_date.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.transferin_date( class="form-control")}}
+                                  {% if form.transferin_date.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.transferin_date.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                                </div>
+              
+                              </div>
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                  {{form.enlistment_date.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.enlistment_date( class="form-control")}}
+                                  {% if form.enlistment_date.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.enlistment_date.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                                </div>
+              
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                  {{form.confirmation_date.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.confirmation_date( class="form-control")}}
+                                  {% if form.confirmation_date.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.confirmation_date.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                                </div>
+              
+                              </div>
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                  {{form.rank.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                  {{form.rank( class="form-control")}}
+                                  {% if form.rank.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.rank.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                                </div>
+              
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                  
+                                </div>
+              
+                              </div>
+                              <div class="col-md-6 mb-4 pb-2">
+              
+                                <div class="form-outline">
+                                    {{form.section.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                                    {{form.section( class="form-control")}}
+                                    {% if form.section.errors %}
+                                        <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                    {% endif %}
+                                    {% for error in form.section.errors %}
+                                        <span class="help-block" style="color: red;">{{ error}}</span>
+                                    {% endfor %}
+                                </div>
+              
+                              </div>
+                          </div>
+            
+                          <div class="row">
+                          <div class="mt-4 pt-2">
+                              <button type="submit" class="btn btn-success btn-lg">
+                                  Save and Continue</button>
+                          </div>
+                       
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

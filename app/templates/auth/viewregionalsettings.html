@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} View Regional Settings{% endblock %}
+
+{% block page_content %} 
+        <div class="page-header">
+            <h3><strong>Regional Settings</strong></h3>
+        </div>
+        
+        <table class="table table-sm">
+            <thead>
+              <tr class="table-success bg-danger">
+                <th scope="col" colspan="3"></th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                
+
+                <tr>
+                  <td><a href="{{ url_for('auth.viewregions') }}"> <button type="button" class="btn btn-success">Regions</button> </a> </td>
+                  <td><a href="{{ url_for('auth.viewcounties') }}"> <button type="button" class="btn btn-warning">Counties</button> </a> </td>                  
+                  <td><a href="{{ url_for('auth.viewsubcounties') }}"> <button type="button" class="btn btn-danger">Subcounties</button> </a> </td>
+                </tr>
+                 
+            </tbody>
+            
+          </table>
+       
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+    {{ super() }}
+    <title>{% block title %}{% endblock %} - TMIS</title>
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+    {% endblock %}
+
+    
+{% block navbar %} 
+ {% include 'navbar.html' %}
+{% endblock %} 
+
+{% block content %}
+<div class="container">
+  <div class="card">
+      <div class="card-body">
+          <div class="row">
+              <div class="col-md-2 bg-danger">
+                
+
+              </div>
+              <div class="col-md-10">
+                  
+                  
+                  <br> <br><br>
+                  
+                      {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %} 
+                        {% for category, message in messages %}
+                        
+                              <div class="alert alert-{{category}}"> 
+                                  <button type="button" class="close" 
+                                  data-dismiss="alert">&times;</button>
+                                  <strong>{{ message }} </strong>   
+                              </div>
+                        {% endfor %} 
+                  {% endif %}
+                  {% endwith%}
+                       
+                  {% block page_content %}
+                  
+                  {% endblock %}
+                  
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+ {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

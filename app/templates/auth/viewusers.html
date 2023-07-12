@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} View Users {% endblock %}
+
+{% block page_content %} 
+
+<div class="container">
+  <div class="card">
+      <div class="card-body">
+          <div class="row">
+              <div class="col-md-8">
+                <div class="page-header justify-content-center">
+                  <h3><strong>Current System Users.</strong></h3>
+              </div>
+              {% if users%}
+              <table class="table table-bordered table-hover table-sm">
+                  <thead>
+                    <tr class="table-success bg-danger">
+                      <th scope="col">#</th>
+                      <th scope="col">Pf number</th>
+                      <th scope="col">User name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for user  in users%}
+      
+                      <tr>
+                          <th scope="row" class="bg-warning"><b>{{ loop.index }}.</b></th>
+                          <td>{{ user.pf_number }}</td>
+                          <td>
+                              {{ user.username }}
+                          </td>
+                          <td>
+                            {{ user.email }}
+                        </td>
+                       
+                          <td colspan="2"><a href="{{ url_for('auth.viewuser', id=user.id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>View Profile</a> |||
+                              <a href="{{ url_for('auth.delete_user', id=user.id) }}" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</a>
+                          
+                          </td>
+                        </tr>
+                      {%endfor%}
+                    <tr>
+                      <td colspan="4" style="align-items: center;">
+                          <a href="{{ url_for('auth.adduser') }}"> <button type="button" class="btn btn-success">Add User</button> </a> 
+                          
+                      </td>
+                      
+                  </tr>
+                  </tbody>
+                  
+                </table>
+              {%else%}
+              <p>There no users created yet.</p>
+              {% endif %}
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>    
+
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} View Sections {% endblock %}
+
+{% block page_content %} 
+        <div class="page-header">
+            <h3><strong>List of all Ranks.</strong></h3>
+        </div>
+        {% if ranks%}
+        <table class="table table-bordered table-hover table-sm">
+            <thead>
+              <tr class="table-success bg-danger">
+                <th scope="col">#</th>
+                <th scope="col">Rank name</th>
+                <th scope="col">Abbreviation</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for rank in ranks%}
+
+                <tr>
+                    <th scope="row" class="bg-warning"><b>{{ loop.index }}.</b></th>
+                    <td>{{ rank.name }}</td>
+                    <td>{{ rank.abbreviation }}</td>
+                    <td colspan="2"><a href="{{ url_for('auth.editrank', id=rank.id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a> |||
+                        <a href="{{ url_for('auth.delete_rank', id=rank.id) }}" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</a>
+                    </td>
+                  </tr>
+                {%endfor%}
+              <tr>
+                <td colspan="4" style="align-items: center;">
+                    <a href="{{ url_for('auth.addrank') }}"> <button type="button" class="btn btn-success">Add Rank</button> </a> 
+                    
+                </td>
+                
+            </tr>
+            </tbody>
+            
+          </table>
+        {%else%}
+        <p>There no sections created yet.</p>
+        <a href="{{ url_for('auth.addrank') }}"> <button type="button" class="btn btn-success">Add Rank</button> </a> 
+        {% endif %}
+        
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Users Profile- {{ user.username }} {% endblock %}
+
+{% block page_content %} 
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        
+        {% if user%}
+        <table class="table table-bordered table-hover table-sm">
+            
+            <tbody>
+                
+              <tr class="bg-danger">
+                <td colspan="5" class="justify-content-right">
+                    <a href="{{ url_for('auth.edituser', id=user.id ) }}"> <button type="button" class="btn btn-success">Edit User</button> </a> 
+                    
+                </td>
+            </tr>
+            </tbody>
+          </table>
+          
+
+          <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ url_for('static', filename='Userprofileimage.png') }}" class=" img-thumbnail img-fluid rounded mx-auto d-block"  alt="{{ user.username }}">
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title"><b>Edit User Information</b></h5>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Pf Number:</th>
+                                        <td><p>{{ wtf.quick_form(form) }} </p></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endif %}
+          
+
+ </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }} 
+{% endblock %}

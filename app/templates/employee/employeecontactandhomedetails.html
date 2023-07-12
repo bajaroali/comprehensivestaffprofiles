@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Contact and  home details  {% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    
+     {% endblock %}
+<script src="https://unpkg.com/htmx.org@1.9.2"></script>
+
+
+{% block page_content %} 
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+          <div class="row">
+                <div class="col-md-7">
+                   
+
+
+                <form action="{{ url_for('employee.employeecontactandhomedetails', id=employee.id) }}" class="form formhorizontal" method="post" novalidate>
+                    <legend><h3><strong>Contact and home details for {{ employee.first_name| upper }}</strong></h3></legend>
+                    {{ form.hidden_tag() }}
+                   <p>
+                        {{form.primary_mobile.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                        {{form.primary_mobile(class="form-control")}}
+                        {% if form.primary_mobile.errors %}
+                            <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                        {% endif %}
+                        {% for error in form.primary_mobile.errors %}
+                            <span class="help-block" style="color: red;">{{ error}}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{form.alternate_mobile.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                        {{form.alternate_mobile(class="form-control")}}
+                        {% if form.alternate_mobile.errors %}
+                            <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                        {% endif %}
+                        {% for error in form.alternate_mobile.errors %}
+                            <span class="help-block" style="color: red;">{{ error}}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{form.email.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                        {{form.email(class="form-control")}}
+                        {% if form.email.errors %}
+                            <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                        {% endif %}
+                        {% for error in form.email.errors %}
+                            <span class="help-block" style="color: red;">{{ error}}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{form.postal_address.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                        {{form.postal_address(class="form-control")}}
+                        {% if form.postal_address.errors %}
+                            <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                        {% endif %}
+                        {% for error in form.postal_address.errors %}
+                            <span class="help-block" style="color: red;">{{ error}}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{form.region.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                        {{ form.region(**{"hx-get": url_for('employee.get_counties'), "hx-trigger": "change", "hx-target": "#county", "hx-swap": "innerHTML", "autocomplete": "off", "class":"form-control"}) }}
+                        {% if form.region.errors %}
+                            <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                        {% endif %}
+                        {% for error in form.region.errors %}
+                            <span class="help-block" style="color: red;">{{ error}}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{form.county.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                        {{ form.county(**{"hx-get": url_for('employee.get_subcounties'), "hx-trigger": "change", "hx-target": "#subcounty", "hx-swap": "innerHTML", "autocomplete": "off", "class":"form-control"}) }}
+                        {% if form.county.errors %}
+                            <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                        {% endif %}
+                        {% for error in form.county.errors %}
+                            <span class="help-block" style="color: red;">{{ error}}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{form.subcounty.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                        {{ form.subcounty(**{"autocomplete": "off", "class":"form-control"}) }}
+                        {% if form.subcounty.errors %}
+                            <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                        {% endif %}
+                        {% for error in form.subcounty.errors %}
+                            <span class="help-block" style="color: red;">{{ error}}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        
+                    </p>
+                    <p>
+                        {{form.village.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                        {{form.village(class="form-control")}}
+                        {% if form.village.errors %}
+                            <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                        {% endif %}
+                        {% for error in form.village.errors %}
+                            <span class="help-block" style="color: red;">{{ error}}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{form.chief.label(class="control-label")}} <span style="color: red;"><sup>*</sup></span>
+                        {{form.chief( class="form-control")}}
+                        {% if form.chief.errors %}
+                            <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                        {% endif %}
+                        {% for error in form.chief.errors %}
+                            <span class="help-block" style="color: red;">{{ error}}</span>
+                        {% endfor %}
+                    </p>
+                    
+                    <p> {{form.submit()}}</p>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-success">
+                        Check In</button>
+                        <a class="btn btn-danger" href="#">Cancel</a>
+                        </div>
+                        </div>
+                </form>
+
+
+                </div>
+                <div class="col-md-3">
+                <button class="btn btn-success">continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

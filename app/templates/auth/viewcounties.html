@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} View Counties {% endblock %}
+
+{% block page_content %} 
+
+<a href="{{ url_for('auth.viewregionalsettings') }}"><span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>Go to previous page</a>
+        <div class="page-header">
+            <h3><strong>List of all Counties.</strong></h3>
+        </div>
+        {% if counties%}
+        <table class="table table-bordered table-hover table-sm">
+            <thead>
+              <tr class="table-success bg-danger">
+                <th scope="col">#</th>
+                <th scope="col">County Code</th>
+                <th scope="col">County name</th>
+                <th scope="col">Region</th>
+
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for county in counties%}
+
+                <tr>
+                    <th scope="row" class="bg-warning"><b>{{ loop.index }}.</b></th>
+                    <td>{{ county.county_code }}</td>
+                    <td>{{ county.name }}</td>
+                    <td>{{ county.region.name }}</td>
+                    
+                    <td colspan="2"><a href="{{ url_for('auth.editcounty', id=county.id)}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a> |||
+                        <a href="{{ url_for('auth.delete_county', id=county.id) }}" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</a>
+                    </td>
+                  </tr>
+                {%endfor%}
+              <tr>
+                <td colspan="5" style="align-items: center;">
+                    <a href="{{ url_for('auth.addcounty') }}"> <button type="button" class="btn btn-success">Add County</button> </a> 
+                    
+                </td>
+                
+            </tr>
+            </tbody>
+            
+          </table>
+        {%else%}
+        <p>There no counties created yet.</p>
+        <a href="{{ url_for('auth.addcounty') }}"> <button type="button" class="btn btn-success">Add County</button> </a> 
+        {% endif %}
+
+{% endblock %}

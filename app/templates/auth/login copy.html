@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Login  {% endblock %}
+
+{% block page_content %} 
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-xl-4 col-lg-3 col-sm-12">
+      <div class="card" style="width: 45rem;">
+        <img class="card-img-top" src="{{ url_for('static', filename='kpsloginlogo.png') }}" alt="KPS Logo">
+        <div class="card-body">
+          <h5 class="card-title">Please Login</h5>
+          <p class="card-text"> {{ wtf.quick_form(form) }}</p>
+          <p>Forgot your password? <a href="#" class="btn btn-primary">Reset</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+

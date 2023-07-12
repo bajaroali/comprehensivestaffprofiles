@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask HTMX</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        select {
+            padding: 10px;
+            border: 1px solid #0ce394;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+
+        button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #025936;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        {{ form.csrf_token }}
+        
+        {{ form.region(**{"hx-get": url_for('employee.get_cities'), "hx-trigger": "change", "hx-target": "#county", "hx-swap": "innerHTML", "autocomplete": "off"}) }}
+        {{ form.county(**{"autocomplete": "off"}) }}
+       
+        <button>Submit</button>
+    </form>
+    
+</body>
+</html>
+
+
+

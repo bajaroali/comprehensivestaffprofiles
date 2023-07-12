@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} List of the subcounties {% endblock %}
+
+{% block page_content %} 
+
+<a href="{{ url_for('auth.viewregionalsettings') }}"><span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>Go to previous page</a>
+        <div class="page-header">
+            <h3><strong>List of all subcounties.</strong></h3>
+        </div>
+        {% if subcounties%}
+        <table class="table table-bordered table-hover table-sm">
+            <thead>
+              <tr class="table-success bg-danger">
+                <th scope="col">#</th>
+                <th scope="col">Subcounty name</th>
+                <th scope="col">County name</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for subcounty in subcounties%}
+
+                <tr>
+                    <th scope="row" class="bg-warning"><b>{{ loop.index }}.</b></th>
+                    <td>{{ subcounty.name }}</td>
+                    <td>{{ subcounty.county.name }}</td>
+                    
+                    <td colspan="2"><a href="{{ url_for('auth.editsubcounty', id=subcounty.id)}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a> |||
+                        <a href="{{ url_for('auth.delete_subcounty', id=subcounty.id) }}" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</a>
+                    </td>
+                  </tr>
+                {%endfor%}
+              <tr>
+                <td colspan="5" style="align-items: center;">
+                    <a href="{{ url_for('auth.addsubcounty') }}"> <button type="button" class="btn btn-success">Add Subcounty</button> </a> 
+                    
+                </td>
+                
+            </tr>
+            </tbody>
+            
+          </table>
+        {%else%}
+        <p>There no subcounties created yet.</p>
+        <a href="{{ url_for('auth.addsubcounty') }}"> <button type="button" class="btn btn-success">Add Subcounty</button> </a> 
+        {% endif %}
+
+{% endblock %}

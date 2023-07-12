@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} View Roles {% endblock %}
+
+{% block page_content %} 
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="page-header justify-content-center">
+                        <h3><strong>List of system previlige levels.</strong></h3>
+                    </div>
+                    {% if roles%}
+                    <table class="table table-bordered table-hover table-sm">
+                        <thead>
+                          <tr class="table-success bg-danger">
+                            <th scope="col">#</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Registered users</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for role in roles%}
+            
+                            <tr>
+                                <th scope="row" class="bg-warning"><b>{{ loop.index }}.</b></th>
+                                <td>{{ role.name }}</td>
+                                <td>
+                                    {% if role.users %}
+                                    <ol>
+                                        {% for user in role.users %}
+                                            <li>
+                                                {{ user.username|title }}
+                                            </li>
+                                        {%endfor%}
+                                        {%else%}
+                                            <p>No users created for this role!</p>
+                                    </ol>
+                                    
+                                    {%endif%}
+            
+                                </td>
+                                <td colspan="2"><a href="{{ url_for('auth.editrole', id=role.id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a> |||
+                                    <a href="{{ url_for('auth.delete_role', id=role.id) }}" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</a>
+                                    
+                                
+                                </td>
+                              </tr>
+                            {%endfor%}
+                          <tr>
+                            <td colspan="4" style="align-items: center;">
+                                <a href="{{ url_for('auth.addrole') }}"> <button type="button" class="btn btn-success">Add Role</button> </a> 
+                                
+                            </td>
+                            
+                        </tr>
+                        </tbody>
+                        
+                      </table>
+                    {%else%}
+                    <p>There no roles created yet.</p>
+                    <a href="{{ url_for('auth.addrole') }}"> <button type="button" class="btn btn-success">Add Role</button> </a> 
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+{% endblock %}
+

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+{{ super() }}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+{% endblock%}
+{% block title %} Add next of kin details.  {% endblock %}
+
+{% block page_content %} 
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+          <div class="row">
+                <div class="col-md-10">
+
+
+                    
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-body p-4 p-md-5">
+             
+              <form action="{{ url_for('employee.addnextofkin', id=employee.id) }}" class="form formhorizontal" method="post" novalidate>
+                <legend><h3><strong>Add next of kin details for {{ employee.first_name|upper }}. </strong></h3></legend>
+                {{ form.hidden_tag() }}
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      
+                      {{form.name(id="name", class="form-control form-control-lg")}}
+                      {{form.name.label(class="form-label")}}<span style="color: red;"><sup>*</sup></span>
+                              
+                              {% if form.name.errors %}
+                                  <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                              {% endif %}
+                              {% for error in form.name.errors %}
+                                  <span class="help-block" style="color: red;">{{ error}}</span>
+                              {% endfor %}
+                    </div>
+                    
+
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      {{form.id_number(id="id_number", class="form-control form-control-lg")}}
+                      {{form.id_number.label(class="form-label")}}<span style="color: red;"><sup>*</sup></span>
+                      {% if form.id_number.errors %}
+                          <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                      {% endif %}
+                      {% for error in form.id_number.errors %}
+                          <span class="help-block" style="color: red;">{{ error}}</span>
+                      {% endfor %}
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4 d-flex align-items-center">
+  
+                    <div class="form-outline">
+                      
+                      {{form.primary_mobile(class="form-control form-control-lg")}}
+                      {{form.primary_mobile.label(class="form-label")}}<span style="color: red;"><sup>*</sup></span>
+                      {% if form.primary_mobile.errors %}
+                          <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                      {% endif %}
+                      {% for error in form.primary_mobile.errors %}
+                          <span class="help-block" style="color: red;">{{ error}}</span>
+                      {% endfor %}
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-check form-check-inline">
+                      <br>
+                      {{form.gender.label(class="form-check-label")}}<span style="color: red;"><sup>*</sup></span>
+                      {{ form.gender(class="control-label") }}
+                      {% if form.gender.errors %}
+                          <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                      {% endif %}
+                      {% for error in form.gender.errors %}
+                          <span class="help-block" style="color: red;">{{ error}}</span>
+                      {% endfor %}
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                      {{form.email(class="form-control form-control-lg")}}
+                      {{form.email.label(class="form-label")}}
+                      
+                      {% if form.email.errors %}
+                          <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                      {% endif %}
+                      {% for error in form.email.errors %}
+                          <span class="help-block" style="color: red;">{{ error}}</span>
+                      {% endfor %}
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                      {{form.address(class="form-control form-control-lg")}}
+                      {{form.address.label(class="form-label")}}
+                      {% if form.address.errors %}
+                          <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                      {% endif %}
+                      {% for error in form.address.errors %}
+                          <span class="help-block" style="color: red;">{{ error}}</span>
+                      {% endfor %}
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                <div class="mt-4 pt-2">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        Save and Continue</button>
+                </div>
+  
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+
+

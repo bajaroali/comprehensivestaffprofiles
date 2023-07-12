@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Employees profiles{% endblock %}
+
+
+{% block page_content %} 
+        <div class="page-header">
+          <div class="d-flex align-items-center justify-content-center">
+            <h3><strong>Employees profiles.</strong></h3>
+          </div>
+        </div>
+        
+        <div class="d-flex align-items-center justify-content-center">
+          <div>
+          <p><a href="{{ url_for('employee.addemployee') }}"> <button type="button" class="btn btn-warning">Add New employee</button> </a></p>
+        </div>
+        </div>
+          
+          <hr style="height:2px;border:none;color:#be0707;background-color:#cd0909;">
+          {% if employees %}
+          <table id="employeesprofiles" class="display" style="width:100%">
+            <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Service no.</td>
+                  <th>Pf no.</td>  
+                  <th>Name</th>
+                  <th>Rank</th>
+                  <th>Section</th>
+                  <th>Gender</th>
+                  <th>County</th>
+                  <th>Tribe</th>
+                  <th></th>
+                </tr>
+                
+            </thead>
+            <tbody>
+              {% for employee in employees %}
+              <tr>
+                <td> <strong>{{ loop.index }}.</strong></td>
+                <td>{{ employee.service_number }}</td>
+                <td>{{ employee.pf_number }}</td>
+                <td>{{ employee.first_name| title }} {{ employee.middle_name| title }} 
+                  {{ employee.last_name| title }}
+                </td>
+                <td>{{ employee.rank.name }}</td>
+                <td>{{ employee.section.name }}</td>
+                <td>{{ employee.gender.name }}</td>
+                <td>{{ employee.county.name }}</td>
+                <td>{{ employee.tribe.name }}</td>
+                <td><a href="{{ url_for('employee.employeeprofile', id=employee.id) }}"> <button type="button" class="btn btn-success">view Profile</button> </a></td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td>3</td>
+              <td>Donna Snider</td>
+              <td>Customer Support</td>
+              <td>New York</td>
+              <td>27</td>
+              <td>2011-01-25</td>
+              <td>$112,000</td>
+              <td>2011-01-25</td>
+              <td>$112,000</td>
+              <td></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Zenaida Frank</td>
+            <td>Software Engineer</td>
+            <td>New York</td>
+            <td>63</td>
+            <td>2010-01-04</td>
+            <td>$125,250</td>
+             <td>2010-01-04</td>
+            <td>$125,250</td>
+            <td></td>
+        </tr>
+        <tr>
+          <td> 5</td>
+            <td>Zorita Serrano</td>
+            <td>Software Engineer</td>
+            <td>San Francisco</td>
+            <td>56</td>
+            <td>2012-06-01</td>
+            <td>$115,000</td>
+            <td>2010-01-04</td>
+            <td>$125,250</td>
+            <td></td>
+        </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>#</th>
+                <th>Service no.</td>
+                <th>Pf no.</td>  
+                <th>Name</th>
+                <th>Rank</th>
+                <th>Section</th>
+                <th>Gender</th>
+                <th>County</th>
+                <th>Tribe</th>
+                <th></th>
+              </tr>
+              
+          </tfoot>
+      </table>
+     {%endif %} 
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css">
+ 
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+     <script src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js"></script>
+     <script src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js"></script>
+     <script src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js"></script>
+     <script src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.flash.min.js"></script> <!-- Include the Buttons Flash extension -->
+ 
+
+      <script>
+      $('#employeesprofiles').DataTable( {
+     dom: 'Bfrtip',
+     buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+ } );
+         
+ 
+     </script>
+    
+
+{% endblock %}

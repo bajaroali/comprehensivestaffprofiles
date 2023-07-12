@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Users Profile- {{ user.username }} {% endblock %}
+
+{% block page_content %} 
+        {% if user%}
+          <div class="container">
+            <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <table class="table table-bordered table-hover table-sm">
+            
+                        <tbody>
+                            
+                          <tr class="bg-danger">
+                            <td colspan="5" class="justify-content-right">
+                                <a href="{{ url_for('auth.edituser', id=user.id ) }}"> <button type="button" class="btn btn-success">Edit User</button> </a> 
+                                
+                            </td>
+                        </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                    
+
+                  </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="{{ url_for('static', filename='Userprofileimage.png') }}" class=" img-thumbnail img-fluid rounded mx-auto d-block"  alt="{{ user.username }}">
+                        </div>
+                        <div class="col-md-8">
+                            <h3 class="card-title"><b>User Information</b></h3>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Pf Number:</th>
+                                        <td>{{ user.pf_number }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Name:</th>
+                                      <td>{{ user.username }}</td>
+                                  </tr>
+                                    <tr>
+                                        <th scope="row">Email:</th>
+                                        <td>{{ user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Account Created:</th>
+                                        <td>{{ (user.date_created).strftime('%Y-%m-%d') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Last Active:</th>
+                                        <td>{{ moment(user.last_active).format('LLL') }} ||-  {{ moment(user.last_active).fromNow(refresh=True) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Privilege Level:</th>
+                                        <td>{{ role.name }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endif %}
+
+
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }} 
+{% endblock %}

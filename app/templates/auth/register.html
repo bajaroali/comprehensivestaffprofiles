@@ -1,0 +1,166 @@
+
+
+<!------------------------------------------------------->
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+{{ super() }}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+{% endblock%}
+{% block title %} Add new User  {% endblock %}
+
+{% block page_content %} 
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+          <div class="row">
+                <div class="col-md-10">
+
+                    <form action="{{ url_for('auth.adduser') }}" class="form formhorizontal" method="post" novalidate>
+                        <legend><h3><strong>Add New User </strong></h3></legend>
+                        {{ form.hidden_tag() }}
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                
+                                  {{form.pf_number.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.pf_number(class="form-control")}}
+                                  {% if form.pf_number.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.pf_number.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+                              
+          
+            
+                            </div>
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                  {{form.user_name.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.user_name(class="form-control")}}
+                                  {% if form.user_name.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.user_name.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                          </div>
+            
+                          <div class="row">
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+            
+                              <div class="form-outline">
+                                
+                                  {{form.email.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.email(class="form-control")}}
+                                  {% if form.email.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.email.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4">
+                              <div class="form-check form-check-inline">
+                                
+                                {{form.password.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.password(class="form-control")}}
+                                  {% if form.password.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.password.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                
+                                  {{form.password2.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.password2(class="form-control")}}
+                                  {% if form.password2.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.password2.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+                              
+          
+            
+                            </div>
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                  {{form.role.label(class="control-label")}}<span style="color: red;"><sup>*</sup></span>
+                                  {{form.role(class="form-control")}}
+                                  {% if form.role.errors %}
+                                      <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                  {% endif %}
+                                  {% for error in form.role.errors %}
+                                      <span class="help-block" style="color: red;">{{ error}}</span>
+                                  {% endfor %}
+                              </div>
+            
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+                              <div class="form-outline">
+                                <br>
+                                {{form.approved.label(class="control-label")}}
+                                {{form.approved()}}
+                                {% if form.approved.errors %}
+                                    <span class="glyphicon glyphicon-warning-sign form-controlfeedback"></span>
+                                {% endif %}
+                                {% for error in form.approved.errors %}
+                                    <span class="help-block" style="color: red;">{{ error}}</span>
+                                {% endfor %}
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4">
+                              <div class="form-check form-check-inline">
+                                
+                                
+                              </div>
+            
+                            </div>
+                          </div>
+                          <div class="row">
+                          <div class="mt-4 pt-2">
+                            <br>
+                              <button type="submit" class="btn btn-success">
+                                  Register</button>
+                          </div>
+                       
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+<!------------------------------------------------------->
